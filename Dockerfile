@@ -7,4 +7,4 @@ USER test123
 COPY pam.conf /pam.conf
 COPY mykeystore.jks /mykeystore.jks
 WORKDIR /
-ENTRYPOINT ["/bin/bash", "-c", "java -XX:+UseContainerSupport -XX:MaxRAMPercentage=50 -jar /h2o_custom.jar -form_auth -pam_login -login_conf pam.conf -jks /mykeystore.jks -jks_pass mypass"]
+ENTRYPOINT ["/bin/bash", "-c", "java -XX:+UseContainerSupport -XX:MaxRAMPercentage=50 -jar /h2o_custom.jar -form_auth -pam_login -login_conf pam.conf  -add_http_header 'X-Forwarded-Proto' 'https' -add_http_header 'X-Forwarded-Protocol' 'https' -add_http_header 'X-Forwarded-Ssl' 'on' -add_http_header 'X-Url-Scheme' 'https'"]
